@@ -1,0 +1,162 @@
+{
+  "name": "Advertisement",
+  "plural": "advertisemets",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "scopes": {
+    "actived": {
+      "order": "createdAt",
+      "where": {
+        "status": "active"
+      }
+    }
+  },
+  "options": {
+    "validateUpsert": true
+  },
+  "scope": {
+    "include": [
+      {
+        "relation": "category"
+      },
+      {
+        "relation": "subCategory"
+      },
+      {
+        "relation": "city"
+      },
+      {
+        "relation": "owner"
+      }
+    ]
+  },
+  "properties": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "fields": {
+      "type": [
+        "FieldValue"
+      ]
+    },
+    "images": {
+      "type": [
+        "string"
+      ],
+      "required": true
+    },
+    "price": {
+      "type": "number",
+      "required": true
+    },
+    "address": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "default": "active"
+    },
+    "viewsCount": {
+      "type": "number",
+      "default": 0
+    },
+    "createdAt": {
+      "type": "date",
+      "defaultFn": "now"
+    },
+    "isBookmarked": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "validations": [],
+  "relations": {
+    "city": {
+      "type": "belongsTo",
+      "model": "City",
+      "foreignKey": "cityId"
+    },
+    "owner": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "ownerId"
+    },
+    "category": {
+      "type": "belongsTo",
+      "model": "Category",
+      "foreignKey": "categoryId"
+    },
+    "subCategory": {
+      "type": "belongsTo",
+      "model": "SubCategory",
+      "foreignKey": "subCategoryId"
+    },
+    "reports": {
+      "type": "hasMany",
+      "model": "advertisementReport",
+      "foreignKey": "advertisementId",
+      "options": {
+        "disableInclude": true
+      }
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "findById"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "__get__actived"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "sendEmail"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "create"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "prototype.__create__reports"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

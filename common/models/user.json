@@ -1,0 +1,177 @@
+{
+  "name": "user",
+  "base": "User",
+  "injectOptionsFromRemoteContext": true,
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true,
+    "ttl": 31536000000
+  },
+  "replaceOnPUT": false,
+  "hidden": [
+    "password",
+    "verificationToken",
+    "emailVerified",
+    "realm",
+    "username"
+  ],
+  "properties": {
+    "firstName": {
+      "type": "string",
+      "required": true
+    },
+    "lastName": {
+      "type": "string",
+      "required": true
+    },
+    "phone": {
+      "type": "string",
+      "required": true
+    },
+    "website": {
+      "type": "string"
+    },
+    "followersCount": {
+      "type": "number",
+      "default": 0
+    },
+    "advertisementCount": {
+      "type": "number",
+      "default": 0
+    },
+    "status": {
+      "type": "string",
+      "default": "pending"
+    },
+    "isFollowed": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "validations": [],
+  "relations": {
+    "roles": {
+      "type": "hasMany",
+      "model": "Role",
+      "foreignKey": "principalId",
+      "through": "RoleMapping",
+      "options": {
+        "disableInclude": true
+      }
+    },
+    "reports": {
+      "type": "hasMany",
+      "model": "advertisementReport",
+      "foreignKey": "userId",
+      "options": {
+        "disableInclude": true
+      }
+    },
+    "followers": {
+      "type": "hasMany",
+      "model": "user",
+      "foreignKey": "userId",
+      "options": {
+        "disableInclude": true
+      },
+      "through": "Follow",
+      "keyThrough": "ownerId"
+    },
+    "following": {
+      "type": "hasMany",
+      "model": "user",
+      "foreignKey": "ownerId",
+      "options": {
+        "disableInclude": true
+      },
+      "through": "Follow",
+      "keyThrough": "userId"
+    },
+    "bookmarks": {
+      "type": "hasMany",
+      "model": "Advertisement",
+      "foreignKey": "ownerId",
+      "through": "Bookmark",
+      "options": {
+        "disableInclude": true
+      }
+    },
+    "notifications": {
+      "type": "hasMany",
+      "model": "Notification",
+      "foreignKey": "ownerId",
+      "options": {
+        "disableInclude": true
+      }
+    }
+  },
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "create"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "login"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "logout"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "confirm"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "resetPassword"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "findById"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "makeNotificationRead"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "me"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

@@ -1,0 +1,44 @@
+{
+  "name": "advertisementReport",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "scope": {
+    "include": [
+      {
+        "relation": "report"
+      }
+    ]
+  },
+  "properties": {
+    "createdAt": {
+      "type": "date",
+      "defaultFn": "now"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "advertisement": {
+      "type": "belongsTo",
+      "model": "Advertisement",
+      "foreignKey": "advertisementId"
+    },
+    "user": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userId",
+      "options": {
+        "disableInclude": true
+      }
+    },
+    "report": {
+      "type": "belongsTo",
+      "model": "Report",
+      "foreignKey": "reportId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

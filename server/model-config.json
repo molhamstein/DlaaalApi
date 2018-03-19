@@ -1,0 +1,209 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "Email": {
+    "dataSource": "email"
+  },
+  "AccessToken": {
+    "dataSource": "db",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "db",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "db",
+    "public": false,
+    "options": {
+      "strictObjectIDCoercion": true
+    }
+  },
+  "Role": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Category": {
+    "dataSource": "db",
+    "public": true,
+    "options": {
+      "remoting": {
+        "sharedMethods": {
+          "*": false,
+          "create": true,
+          "find": true,
+          "updateAttributes": true,
+          "count": true,
+          "findById": true,
+          "deleteById": true,
+          "replaceById": true,
+          "prototype.patchAttributes": true,
+          "prototype.__get__subCategories": true,
+          "prototype.__create__subCategories": true,
+          "prototype.__updateAttributes__subCategories": true,
+          "prototype.__updateById__subCategories": true,
+          "prototype.__count__subCategories": true,
+          "prototype.__delete__subCategories": true,
+          "prototype.__destroyById__subCategories": true
+        }
+      }
+    }
+  },
+  "user": {
+    "dataSource": "db",
+    "public": true,
+    "options": {
+      "remoting": {
+        "sharedMethods": {
+          "*": false,
+          "create": true,
+          "me": true,
+          "makeNotificationRead": true,
+          "find": true,
+          "deactivate": true,
+          "activate": true,
+          "updateAttributes": true,
+          "count": true,
+          "findById": true,
+          "login": true,
+          "logout": true,
+          "resetPassword": true,
+          "setPassword": true,
+          "confirm": true,
+          "changePassword": true,
+          "replaceById": true,
+          "prototype.patchAttributes": true,
+          "prototype.__get__followers": true,
+          "prototype.__get__roles": true,
+          "prototype.__get__reports": true,
+          "prototype.__get__notifications": true,
+          "prototype.__get__following": true,
+          "prototype.__link__following": true,
+          "prototype.__unlink__following": true,
+          "prototype.__get__bookmarks": true,
+          "prototype.__link__bookmarks": true,
+          "prototype.__unlink__bookmarks": true
+        }
+      }
+    }
+  },
+  "SubCategory": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Field": {
+    "dataSource": "db",
+    "public": false
+  },
+  "FieldValue": {
+    "dataSource": "db",
+    "public": false
+  },
+  "City": {
+    "dataSource": "db",
+    "public": true,
+    "options": {
+      "remoting": {
+        "sharedMethods": {
+          "*": false,
+          "create": true,
+          "find": true,
+          "updateAttributes": true,
+          "count": true,
+          "findById": true,
+          "deleteById": true,
+          "replaceById": true,
+          "prototype.patchAttributes": true
+        }
+      }
+    }
+  },
+  "Report": {
+    "dataSource": "db",
+    "public": true,
+    "options": {
+      "remoting": {
+        "sharedMethods": {
+          "*": false,
+          "create": true,
+          "find": true,
+          "updateAttributes": true,
+          "count": true,
+          "findById": true,
+          "deleteById": true,
+          "replaceById": true,
+          "prototype.patchAttributes": true
+        }
+      }
+    }
+  },
+  "advertisementReport": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Bookmark": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Follow": {
+    "dataSource": "db",
+    "public": false
+  },
+  "FileContainer": {
+    "dataSource": "storage",
+    "public": true,
+    "options": {
+      "remoting": {
+        "sharedMethods": {
+          "*": false,
+          "upload": true,
+          "download": true
+        }
+      }
+    }
+  },
+  "Advertisement": {
+    "dataSource": "db",
+    "public": true,
+    "options": {
+      "remoting": {
+        "sharedMethods": {
+          "*": false,
+          "find": true,
+          "count": true,
+          "create": true,
+          "findById": true,
+          "patchOrCreate": true,
+          "updateAttributes": true,
+          "replaceById": true,
+          "deleteById": true,
+          "__get__actived": true,
+          "sendEmail": true,
+          "prototype.patchAttributes": true,
+          "prototype.__get__category": true,
+          "prototype.__get__subCategory": true,
+          "prototype.__get__city": true,
+          "prototype.__get__owner": true,
+          "prototype.__get__reports": true,
+          "prototype.__create__reports": true
+        }
+      }
+    }
+  },
+  "Notification": {
+    "dataSource": "db",
+    "public": false
+  }
+}
