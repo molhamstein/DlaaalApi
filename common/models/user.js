@@ -42,7 +42,11 @@ module.exports = function (User) {
     });
   }
 
+
+
   function setIsFollowed(result, ctx) {
+    console.log("setIsFollowed");
+    
     return new Promise(function (resolve, reject) {
       // const currentCtx = LoopBackContext.getCurrentContext();
       // const locals = currentCtx ? currentCtx.get('http').res.locals : 0;
@@ -52,8 +56,8 @@ module.exports = function (User) {
           const followingIds = users.map(function (user) {
             return user.id;
           });
-          // console.log(users)
           if (Array.isArray(result)) {
+            console.assert("Teeeeeeeest")
             result = result.map(res => {
               res.isFollowed = followingIds.findIndex(o => o.toString() === res.id.toString()) !== -1;
               return res;
@@ -76,8 +80,9 @@ module.exports = function (User) {
       next();
     }).catch(err => next(err));
   });
-  User.afterRemote('findById  ', function (context, user, next) {
-    setIsFollowed(context.result).then(result => {
+  User.afterRemote('findById', function (context, user, next) {
+    console.log("findById");
+    setIsFollowed(context.result,context).then(result => {
       context.result = result;
       next();
     }).catch(err => next(err));
@@ -142,6 +147,9 @@ module.exports = function (User) {
       }
     ]
   });
+
+
+
 
 //activate user
   User.activate = (id, callback) => {
@@ -254,8 +262,13 @@ module.exports = function (User) {
     const locals = context.res.locals;
     locals.user.following.find({}).then(users => {
       const followingIds = users.map(function (user) {
-        return user.id;
+        return parseInt(user.id);
       });
+     if(followingIds[0]==context.req.params.fk){
+       console.log(followingIds.indexOf(parseInt(context.req.params.fk)));
+     }else{
+       console.log(false);       
+     }
       if (followingIds.indexOf(parseInt(context.req.params.fk)) === -1) {
         return next(errors.follow.notFollowed());
       } else {
@@ -265,6 +278,7 @@ module.exports = function (User) {
   });
 
   User.afterRemote('prototype.__unlink__following', function (context, user, next) {
+    console.log("Teeeeeeeeeeest")
     User.findById(context.req.params.fk).then(user => {
       user.followersCount--;
       user.save().then(() => next());

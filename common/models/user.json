@@ -22,7 +22,7 @@
     },
     "lastName": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "phone": {
       "type": "string",
