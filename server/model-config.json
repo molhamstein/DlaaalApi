@@ -205,5 +205,9 @@
   "Notification": {
     "dataSource": "db",
     "public": false
+  },
+  "option": {
+    "dataSource": "db",
+    "public": false
   }
 }

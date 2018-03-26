@@ -6,7 +6,6 @@ module.exports = async function (app) {
   const configPath = process.env.NODE_ENV === undefined ? '../../server/config.json' : `../../server/config.${process.env.NODE_ENV}.json`;
   const config = require(configPath);
   const imageBaseUrl = config.domain + '/api';
-
   const images = [
     imageBaseUrl + '/files/images/download/e99bcfb0-ddd3-11e7-8654-77a982fe81a21512928788523.jpg',
     imageBaseUrl + '/files/images/download/e99bcfb0-ddd3-11e7-8654-77a982fe81a21512928788523.jpg',
@@ -29,7 +28,7 @@ module.exports = async function (app) {
     },
     {
       key: 'key4',
-      type: 'choose',
+      type: ' ',
       values: [
         'value1',
         'value2'
@@ -58,6 +57,7 @@ module.exports = async function (app) {
 
   try {
     const user = await User.find();
+  console.log("Teeeeeeeeeeeeeeeeeeeeeeeeeeeeest");
 
     if (user.length <= 0) {
       // for fileSystem conntainer
@@ -75,7 +75,7 @@ module.exports = async function (app) {
 
       let users = await User.create([
         {
-          email: 'admin@dlaaal.com',
+          email: 'admin2@dlaaal.com',
           password: 'password',
           emailVerified: true,
           status: "active",
@@ -120,7 +120,7 @@ module.exports = async function (app) {
 
       let customer = users.find(o => o.email === 'customer1@dlaaal.com');
       let customer2 = users.find(o => o.email === 'customer2@dlaaal.com');
-      let appAdmin = users.find(o => o.email === 'admin@dlaaal.com');
+      let appAdmin = users.find(o => o.email === 'admin2@dlaaal.com');
 
       //Create Roles and assign to user
       Role.create({

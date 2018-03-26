@@ -74,6 +74,12 @@ module.exports = function (User) {
     });
   }
 
+
+User.afterRemote('post', function (context, user, next) {
+  console.log("Teeeeeeeeeeest")
+});
+
+
   User.afterRemote('find', function (context, user, next) {
     setIsFollowed(context.result, context).then(result => {
       context.result = result;
@@ -278,7 +284,6 @@ module.exports = function (User) {
   });
 
   User.afterRemote('prototype.__unlink__following', function (context, user, next) {
-    console.log("Teeeeeeeeeeest")
     User.findById(context.req.params.fk).then(user => {
       user.followersCount--;
       user.save().then(() => next());

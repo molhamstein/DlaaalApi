@@ -1,12 +1,12 @@
 {
   "name": "user",
   "base": "User",
-  "injectOptionsFromRemoteContext": true,
   "idInjection": true,
   "options": {
     "validateUpsert": true,
     "ttl": 31536000000
   },
+  "injectOptionsFromRemoteContext": true,
   "replaceOnPUT": false,
   "hidden": [
     "password",

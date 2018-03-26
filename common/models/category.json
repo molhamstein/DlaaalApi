@@ -13,6 +13,11 @@
     },
     "image": {
       "type": "string"
+    },
+    "fields": {
+      "type": [
+        "Field"
+      ]
     }
   },
   "validations": [],

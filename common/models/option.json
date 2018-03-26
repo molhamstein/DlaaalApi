@@ -1,12 +1,12 @@
 {
-  "name": "SubCategory",
+  "name": "option",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "title": {
+    "value": {
       "type": "string",
       "required": true
     },
@@ -17,13 +17,7 @@
     }
   },
   "validations": [],
-  "relations": {
-    "category": {
-      "type": "belongsTo",
-      "model": "Category",
-      "foreignKey": "categoryId"
-    }
-  },
+  "relations": {},
   "acls": [],
   "methods": {}
 }
