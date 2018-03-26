@@ -57,9 +57,10 @@ module.exports = async function (app) {
 
   try {
     const user = await User.find();
-  console.log("Teeeeeeeeeeeeeeeeeeeeeeeeeeeeest");
 
     if (user.length <= 0) {
+  console.log("Teeeeeeeeeeeeeeeeeeeeeeeeeeeeest");
+      
       // for fileSystem conntainer
       // const imageContainer = await  FileContainer.getContainer('images');
       // if (!imageContainer) {
