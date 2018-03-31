@@ -1,23 +1,25 @@
 {
-  "name": "option",
+  "name": "search",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "value": {
-      "type": "string",
-      "required": true
-    },
     "fields": {
       "type": [
-        "Field"
+        "FieldValue"
       ]
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "owner": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "ownerId"
+    }
+  },
   "acls": [],
   "methods": {}
 }

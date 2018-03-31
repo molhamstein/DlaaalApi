@@ -1,10 +1,11 @@
 {
   "name": "Field",
-  "base": "PersistedModel",
   "plural": "fields",
+  "base": "PersistedModel",
   "options": {
     "validateUpsert": true
   },
+  "forceId": true,
   "properties": {
     "key": {
       "type": "string",
@@ -42,6 +43,5 @@
       "permission": "ALLOW"
     }
   ],
-  "methods": {},
-  "forceId": true
+  "methods": {}
 }
