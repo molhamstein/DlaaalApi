@@ -75,9 +75,7 @@ module.exports = function (User) {
   }
 
 
-User.afterRemote('post', function (context, user, next) {
-  console.log("Teeeeeeeeeeest")
-});
+
 
 
   User.afterRemote('find', function (context, user, next) {

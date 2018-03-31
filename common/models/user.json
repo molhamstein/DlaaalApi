@@ -96,6 +96,15 @@
         "disableInclude": true
       }
     },
+    "searches": {
+      "type": "hasMany",
+      "model": "search",
+      "foreignKey": "ownerId",
+      "through": "search",
+      "options": {
+        "disableInclude": true
+      }
+    },
     "notifications": {
       "type": "hasMany",
       "model": "Notification",

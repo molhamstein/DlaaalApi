@@ -209,5 +209,9 @@
   "option": {
     "dataSource": "db",
     "public": false
+  },
+  "search": {
+    "dataSource": "db",
+    "public": true
   }
 }

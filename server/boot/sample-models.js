@@ -28,7 +28,7 @@ module.exports = async function (app) {
     },
     {
       key: 'key4',
-      type: ' ',
+      type: 'choose ',
       values: [
         'value1',
         'value2'
@@ -58,9 +58,7 @@ module.exports = async function (app) {
   try {
     const user = await User.find();
 
-    if (user.length <= 0) {
-  console.log("Teeeeeeeeeeeeeeeeeeeeeeeeeeeeest");
-      
+    if (user.length <= 0) {      
       // for fileSystem conntainer
       // const imageContainer = await  FileContainer.getContainer('images');
       // if (!imageContainer) {

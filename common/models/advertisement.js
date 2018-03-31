@@ -25,12 +25,12 @@ module.exports = function (Advertisement) {
 
           if (Array.isArray(result)) {
             result = result.map(res => {
-              console.log(res.id);
-              console.log(bookmarksIds[0]);
+              // console.log(res.id);
+              // console.log(bookmarksIds[0]);
               res.isBookmarked = bookmarksIds.findIndex(o => o.toString() === res.id.toString()) !== -1;
               return res;
             });
-            console.log(result);
+            // console.log(result);
             resolve(result);
           } else {
             result.isBookmarked = bookmarksIds.findIndex(o => o.toString() === result.id.toString()) !== -1;
@@ -42,6 +42,15 @@ module.exports = function (Advertisement) {
       }
     });
   }
+
+
+  Advertisement.afterRemote('__get__identities', function (context, user, next) {
+    console.log("teeeeeeeeeeeeeeeeeeeeeeeeesssssssssssssstttttttt");
+    
+    console.log("context.req.body");
+    console.log(context.req.query);
+    next();
+  });
 
   Advertisement.afterRemote('find', function (context, user, next) {
     setIsBookmarked(context.result, context).then(result => {
@@ -182,7 +191,7 @@ module.exports = function (Advertisement) {
         arg: 'id',
         type: 'number',
         description: 'Advertisement ID',
-        http: {source: 'path'},
+        http: { source: 'path' },
       },
       {
         arg: 'data',
@@ -193,7 +202,7 @@ module.exports = function (Advertisement) {
         message:string
         }`,
         description: ' send email to ads owner {email, name, phone, message}',
-        http: {source: 'body'},
+        http: { source: 'body' },
       }
     ],
     returns: []
