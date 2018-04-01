@@ -6,10 +6,8 @@
     "validateUpsert": true
   },
   "properties": {
-    "fields": {
-      "type": [
-        "FieldValue"
-      ]
+    "filter": {
+      "type": "string"
     }
   },
   "validations": [],

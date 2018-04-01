@@ -44,11 +44,11 @@ module.exports = function (Advertisement) {
   }
 
 
-  Advertisement.afterRemote('__get__identities', function (context, user, next) {
-    console.log("teeeeeeeeeeeeeeeeeeeeeeeeesssssssssssssstttttttt");
-    
-    console.log("context.req.body");
-    console.log(context.req.query);
+  Advertisement.afterRemote('**', function (context, user, next) {
+    var filter = context.req.query;
+    // console.log(filter["save"])
+    // if (filter.save)
+      console.log(context.req.query);
     next();
   });
 
