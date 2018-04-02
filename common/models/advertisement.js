@@ -44,13 +44,6 @@ module.exports = function (Advertisement) {
   }
 
 
-  Advertisement.afterRemote('**', function (context, user, next) {
-    var filter = context.req.query;
-    // console.log(filter["save"])
-    // if (filter.save)
-      console.log(context.req.query);
-    next();
-  });
 
   Advertisement.afterRemote('find', function (context, user, next) {
     setIsBookmarked(context.result, context).then(result => {
