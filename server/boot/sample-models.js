@@ -30,8 +30,8 @@ module.exports = async function (app) {
       key: 'key4',
       type: 'choose ',
       values: [
-        'value1',
-        'value2'
+       {value:'value1'},
+       {value:'value2'}
       ]
     }
   ];
