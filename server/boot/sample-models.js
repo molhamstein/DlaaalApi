@@ -167,7 +167,7 @@ module.exports = async function (app) {
 
       let customer = users.find(o => o.email === 'customer1@dlaaal.com');
       let customer2 = users.find(o => o.email === 'customer2@dlaaal.com');
-      let appAdmin = users.find(o => o.email === 'admin2@dlaaal.com');
+      let appAdmin = users.find(o => o.email === 'admin@dlaaal.com');
 
       //Create Roles and assign to user
       Role.create({
