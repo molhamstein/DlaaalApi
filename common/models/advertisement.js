@@ -9,7 +9,7 @@ const LoopBackContext = require('loopback-context');
 const errors = require('../../server/errors');
 const isEmail = require('isemail');
 
-module.exports = function (Advertisement) {
+module.exports = function (Advertisement,Search) {
   //status active/closed/expired
 
   function setIsBookmarked(result, ctx) {
@@ -221,6 +221,7 @@ module.exports = function (Advertisement) {
             .catch(err => console.log(err));
         });
       }
+
     }
     next();
   });

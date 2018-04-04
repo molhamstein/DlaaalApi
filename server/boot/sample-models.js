@@ -28,7 +28,7 @@ module.exports = async function (app) {
     },
     {
       key: 'key4',
-      type: 'choose ',
+      type: 'choose',
       values: [
         { value: 'value1' },
         { value: 'value2' }
@@ -39,13 +39,13 @@ module.exports = async function (app) {
   const carFields = [
     {
       key: 'نوع السيارة',
-      type: 'choose ',
+      type: 'choose',
       values: [
         {
           value: 'Kia', "fields": [
             {
               key: 'Kia نوع السيارة',
-              type: 'choose ',
+              type: 'choose',
               values: [
                 { value: 'Rio 1' },
                 { value: 'Rio 2' },
@@ -58,7 +58,7 @@ module.exports = async function (app) {
           value: 'Ford', "fields": [
             {
               key: 'Ford نوع السيارة',
-              type: 'choose ',
+              type: 'choose',
               values: [
                 { value: 'mustang 1' },
                 { value: 'mustang 2' },
@@ -71,7 +71,7 @@ module.exports = async function (app) {
           value: 'Mercedes', "fields": [
             {
               key: 'Mercedes نوع السيارة',
-              type: 'choose ',
+              type: 'choose',
               values: [
                 { value: 'amg 1' },
                 { value: 'amg 2' },
