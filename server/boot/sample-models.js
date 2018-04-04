@@ -30,8 +30,56 @@ module.exports = async function (app) {
       key: 'key4',
       type: 'choose ',
       values: [
-       {value:'value1'},
-       {value:'value2'}
+        { value: 'value1' },
+        { value: 'value2' }
+      ]
+    }
+  ];
+
+  const carFields = [
+    {
+      key: 'نوع السيارة',
+      type: 'choose ',
+      values: [
+        {
+          value: 'Kia', "fields": [
+            {
+              key: 'Kia نوع السيارة',
+              type: 'choose ',
+              values: [
+                { value: 'Rio 1' },
+                { value: 'Rio 2' },
+                { value: 'Rio 3' }
+              ]
+            }
+          ]
+        },
+        {
+          value: 'Ford', "fields": [
+            {
+              key: 'Ford نوع السيارة',
+              type: 'choose ',
+              values: [
+                { value: 'mustang 1' },
+                { value: 'mustang 2' },
+                { value: 'mustang 3' }
+              ]
+            }
+          ]
+        },
+        {
+          value: 'Mercedes', "fields": [
+            {
+              key: 'Mercedes نوع السيارة',
+              type: 'choose ',
+              values: [
+                { value: 'amg 1' },
+                { value: 'amg 2' },
+                { value: 'amg 3' }
+              ]
+            }
+          ]
+        }
       ]
     }
   ];
@@ -58,7 +106,7 @@ module.exports = async function (app) {
   try {
     const user = await User.find();
 
-    if (user.length <= 0) {      
+    if (user.length <= 0) {
       // for fileSystem conntainer
       // const imageContainer = await  FileContainer.getContainer('images');
       // if (!imageContainer) {
@@ -74,7 +122,7 @@ module.exports = async function (app) {
 
       let users = await User.create([
         {
-          email: 'admin2@dlaaal.com',
+          email: 'admin@dlaaal.com',
           password: 'password',
           emailVerified: true,
           status: "active",
@@ -104,16 +152,16 @@ module.exports = async function (app) {
       // console.log('Created users:', users);
 
       let cities = await app.models.City.create([
-        {name: 'دمشق'},
-        {name: 'ريف دمشق'},
-        {name: 'حمص'},
+        { name: 'دمشق' },
+        { name: 'ريف دمشق' },
+        { name: 'حمص' },
       ]);
       // console.log('Created cities:', cities);
 
       let reports = await app.models.Report.create([
-        {name: 'أساء تصنيف'},
-        {name: 'تكرار'},
-        {name: 'منتهي الصلاحية'},
+        { name: 'أساء تصنيف' },
+        { name: 'تكرار' },
+        { name: 'منتهي الصلاحية' },
       ]);
       // console.log('Created reports:', reports);
 
@@ -141,7 +189,8 @@ module.exports = async function (app) {
         },
         {
           title: 'مركبات',
-          image: images[0]
+          image: images[0],
+          fields: carFields
         },
         {
           title: 'متفرقات',
