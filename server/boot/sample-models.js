@@ -30,8 +30,8 @@ module.exports = async function (app) {
       key: 'key4',
       type: 'choose',
       values: [
-        { value: 'value1' },
-        { value: 'value2' }
+        { value: 'value1', fields: [] },
+        { value: 'value2', fields: [] }
       ]
     }
   ];
@@ -47,9 +47,9 @@ module.exports = async function (app) {
               key: 'Kia نوع السيارة',
               type: 'choose',
               values: [
-                { value: 'Rio 1' },
-                { value: 'Rio 2' },
-                { value: 'Rio 3' }
+                { value: 'Rio 1', fields: [] },
+                { value: 'Rio 2', fields: [] },
+                { value: 'Rio 3', fields: [] }
               ]
             }
           ]
@@ -60,9 +60,9 @@ module.exports = async function (app) {
               key: 'Ford نوع السيارة',
               type: 'choose',
               values: [
-                { value: 'mustang 1' },
-                { value: 'mustang 2' },
-                { value: 'mustang 3' }
+                { value: 'mustang 1', fields: [] },
+                { value: 'mustang 2', fields: [] },
+                { value: 'mustang 3', fields: [] }
               ]
             }
           ]
@@ -73,9 +73,9 @@ module.exports = async function (app) {
               key: 'Mercedes نوع السيارة',
               type: 'choose',
               values: [
-                { value: 'amg 1' },
-                { value: 'amg 2' },
-                { value: 'amg 3' }
+                { value: 'amg 1', fields: [] },
+                { value: 'amg 2', fields: [] },
+                { value: 'amg 3', fields: [] }
               ]
             }
           ]
@@ -251,45 +251,45 @@ module.exports = async function (app) {
       //   userId: appAdmin.id
       // });
 
-      const ads = await app.models.Advertisement.create([
-        {
-          title: "شيفروليه امبالا كاملة المواصفات",
-          description: "خالية العلام",
-          fields: [
-            {
-              "key": "string",
-              "value": "string",
-            }
-          ],
-          images: images,
-          price: 120000000.,
-          address: "مشروع دمر",
-          phone: "+96334582135",
-          cityId: cities.find(o => o.name === 'دمشق').id,
-          categoryId: categories.find(o => o.title === 'مركبات').id,
-          subCategoryId: subCategories.find(o => o.title === 'مركبات 1').id,
-          ownerId: customer.id
-        },
-        {
-          title: "شيفروليه ",
-          description: "خالية العلام",
-          fields: [
-            {
-              "key": "string",
-              "value": "string",
-            }
-          ],
-          images: images,
-          price: 120000000.,
-          address: "مشروع دمر",
-          status: 'closed',
-          phone: "+96334582135",
-          cityId: cities.find(o => o.name === 'دمشق').id,
-          categoryId: categories.find(o => o.title === 'مركبات').id,
-          subCategoryId: subCategories.find(o => o.title === 'مركبات 1').id,
-          ownerId: customer.id
-        }
-      ]);
+      // const ads = await app.models.Advertisement.create([
+      //   {
+      //     title: "شيفروليه امبالا كاملة المواصفات",
+      //     description: "خالية العلام",
+      //     fields: [
+      //       {
+      //         "key": "string",
+      //         "value": "string",
+      //       }
+      //     ],
+      //     images: images,
+      //     price: 120000000.,
+      //     address: "مشروع دمر",
+      //     phone: "+96334582135",
+      //     cityId: cities.find(o => o.name === 'دمشق').id,
+      //     categoryId: categories.find(o => o.title === 'مركبات').id,
+      //     subCategoryId: subCategories.find(o => o.title === 'مركبات 1').id,
+      //     ownerId: customer.id
+      //   },
+      //   {
+      //     title: "شيفروليه ",
+      //     description: "خالية العلام",
+      //     fields: [
+      //       {
+      //         "key": "string",
+      //         "value": "string",
+      //       }
+      //     ],
+      //     images: images,
+      //     price: 120000000.,
+      //     address: "مشروع دمر",
+      //     status: 'closed',
+      //     phone: "+96334582135",
+      //     cityId: cities.find(o => o.name === 'دمشق').id,
+      //     categoryId: categories.find(o => o.title === 'مركبات').id,
+      //     subCategoryId: subCategories.find(o => o.title === 'مركبات 1').id,
+      //     ownerId: customer.id
+      //   }
+      // ]);
       // console.log('Created Ads: ', ads);
       //
       // await app.models.Notification.create([

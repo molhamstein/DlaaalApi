@@ -9,7 +9,7 @@ const LoopBackContext = require('loopback-context');
 const errors = require('../../server/errors');
 const isEmail = require('isemail');
 
-module.exports = function (Advertisement,Search) {
+module.exports = function (Advertisement) {
   //status active/closed/expired
 
   function setIsBookmarked(result, ctx) {
@@ -223,6 +223,65 @@ module.exports = function (Advertisement,Search) {
       }
 
     }
+
+    // console.log(Advertisement.app.models.Search.find());
+    Advertisement.app.models.Search.find().then(Searches => {
+      console.log(ctx.instance.ownerId);
+      var letUserID = []
+      Searches.forEach(function (element) {
+        if (letUserID[element.ownerId] == null && ctx.instance.ownerId != element.ownerId) {
+          var tempAdvertisement = ctx.instance;
+          if (element.categoryId != null && element.categoryId != tempAdvertisement.categoryId) {
+            return;
+          }
+          if (element.subCategoryId != null && element.subCategoryId != tempAdvertisement.subCategoryId) {
+            return;
+          }
+          if (element.maxPrice != null && element.maxPrice <= tempAdvertisement.price) {
+            return;
+          }
+          if (element.minPrice != null && element.minPrice >= tempAdvertisement.price) {
+            return;
+          }
+
+          if (element.title != null && tempAdvertisement.title.indexOf(element.title) == -1) {
+            return;
+          }
+
+          if (element.cityId != null && element.cityId != tempAdvertisement.cityId) {
+            return;
+          }
+          if (element.fields) {
+            var tempFields = tempAdvertisement.fields;
+            var indexFieldSearch = 0;
+            var isPassed = true;
+            tempFields.forEach(function (fieldElement) {
+              if (element.fields[indexFieldSearch] != null && fieldElement.key == element.fields[indexFieldSearch].key) {
+                if (fieldElement.value == element.fields[indexFieldSearch].value) {
+                  indexFieldSearch++;
+                } else {
+                  isPassed = false;
+                  return false;
+                }
+              }
+            }, this);
+            if (isPassed == false || indexFieldSearch != element.fields.length)
+              return
+          }
+          var notification = {
+            advertisementId: ctx.instance.id,
+            ownerId: element.ownerId,
+            type: 'SEARCH_ADS',
+            name: element.name
+          };
+          Advertisement.app.models.Notification.create(notification)
+            .then()
+            .catch(err => console.log(err));
+
+          letUserID[element.ownerId] = true;
+        }
+      }, this);
+    });
     next();
   });
 };

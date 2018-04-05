@@ -25,6 +25,8 @@
     "createdAt": {
       "type": "date",
       "defaultFn": "now"
+    },"name": {
+      "type": "string"
     }
   },
   "validations": [],
