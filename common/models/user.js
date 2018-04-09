@@ -30,7 +30,7 @@ module.exports = function (User) {
       user: user
     };
 
-    options.verifyHref = "http://104.217.253.15/dlaaalApp/Dlaaal-webApp/dist/#" +
+    options.verifyHref = "http://104.217.253.15/dlaaalAppdevelop/Dlaaal-webApp/dist/#" +
       '/login/verify' +
       '?uid=' + options.user.id;
     user.verify(options, function (err, res) {
@@ -103,7 +103,7 @@ module.exports = function (User) {
   //send password reset link when requested
   User.on('resetPasswordRequest', function (info) {
     // let url = `${config.siteDomain}/login/reset-password?access_token=${info.accessToken.id}&user_id=${info.user.id}`;
-    let url = "http://104.217.253.15/dlaaalApp/Dlaaal-webApp/dist/#" + `/login/reset-password?access_token=${info.accessToken.id}&user_id=${info.user.id}`;
+    let url = "http://104.217.253.15/dlaaalAppdevelop/Dlaaal-webApp/dist/#" + `/login/reset-password?access_token=${info.accessToken.id}&user_id=${info.user.id}`;
     ejs.renderFile(path.resolve(__dirname + "../../../server/views/reset-password-template.ejs"), { url: url }, function (err, html) {
       if (err) return console.log('> error sending password reset email', err);
       User.app.models.Email.send({

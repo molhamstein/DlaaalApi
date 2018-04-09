@@ -270,7 +270,6 @@ module.exports = function (Advertisement) {
             if (isPassed == false || indexFieldSearch != element.fields.length)
               return
           }
-          console.log(element);
           var notification = {
             advertisementId: ctx.instance.id,
             ownerId: element.ownerId,
