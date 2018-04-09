@@ -232,7 +232,13 @@ module.exports = function (Advertisement) {
           if (element.subCategoryId != null && element.subCategoryId != tempAdvertisement.subCategoryId) {
             return;
           }
+            console.log("element.maxPrice");
+            console.log(element.maxPrice);
+            console.log("tempAdvertisement.price");
+            console.log(tempAdvertisement.price);
+          
           if (element.maxPrice != null && element.maxPrice <= tempAdvertisement.price) {
+            console.log("MaxPriceErrore");
             return;
           }
           if (element.minPrice != null && element.minPrice >= tempAdvertisement.price) {
@@ -251,8 +257,9 @@ module.exports = function (Advertisement) {
             var indexFieldSearch = 0;
             var isPassed = true;
             tempFields.forEach(function (fieldElement) {
-              if (element.fields[indexFieldSearch] != null && fieldElement.key == element.fields[indexFieldSearch].key) {
-                if (fieldElement.value == element.fields[indexFieldSearch].value) {
+              var fieldInSearch=element.fields.find(x => x._id == fieldElement._id);
+              if (fieldInSearch != null) {
+                if (fieldElement.value == fieldInSearch.value) {
                   indexFieldSearch++;
                 } else {
                   isPassed = false;
@@ -263,6 +270,7 @@ module.exports = function (Advertisement) {
             if (isPassed == false || indexFieldSearch != element.fields.length)
               return
           }
+          console.log(element);
           var notification = {
             advertisementId: ctx.instance.id,
             ownerId: element.ownerId,
