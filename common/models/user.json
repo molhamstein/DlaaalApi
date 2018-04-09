@@ -6,7 +6,6 @@
     "validateUpsert": true,
     "ttl": 31536000000
   },
-  "injectOptionsFromRemoteContext": true,
   "replaceOnPUT": false,
   "hidden": [
     "password",
@@ -175,11 +174,18 @@
       "property": "me"
     },
     {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "contactus"
+    },
+    {
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "admin",
       "permission": "ALLOW"
     }
   ],
-  "methods": {}
+  "methods": {
+  }
 }

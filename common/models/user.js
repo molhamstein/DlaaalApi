@@ -46,7 +46,7 @@ module.exports = function (User) {
 
   function setIsFollowed(result, ctx) {
     console.log("setIsFollowed");
-    
+
     return new Promise(function (resolve, reject) {
       // const currentCtx = LoopBackContext.getCurrentContext();
       // const locals = currentCtx ? currentCtx.get('http').res.locals : 0;
@@ -86,7 +86,7 @@ module.exports = function (User) {
   });
   User.afterRemote('findById', function (context, user, next) {
     console.log("findById");
-    setIsFollowed(context.result,context).then(result => {
+    setIsFollowed(context.result, context).then(result => {
       context.result = result;
       next();
     }).catch(err => next(err));
@@ -100,11 +100,11 @@ module.exports = function (User) {
     })
   });
 
-//send password reset link when requested
+  //send password reset link when requested
   User.on('resetPasswordRequest', function (info) {
     // let url = `${config.siteDomain}/login/reset-password?access_token=${info.accessToken.id}&user_id=${info.user.id}`;
-    let url = "http://104.217.253.15/dlaaalApp/Dlaaal-webApp/dist/#"+`/login/reset-password?access_token=${info.accessToken.id}&user_id=${info.user.id}`;
-    ejs.renderFile(path.resolve(__dirname + "../../../server/views/reset-password-template.ejs"), {url: url}, function (err, html) {
+    let url = "http://104.217.253.15/dlaaalApp/Dlaaal-webApp/dist/#" + `/login/reset-password?access_token=${info.accessToken.id}&user_id=${info.user.id}`;
+    ejs.renderFile(path.resolve(__dirname + "../../../server/views/reset-password-template.ejs"), { url: url }, function (err, html) {
       if (err) return console.log('> error sending password reset email', err);
       User.app.models.Email.send({
         to: info.email,
@@ -125,7 +125,7 @@ module.exports = function (User) {
     }).catch(err => next(err));
   });
 
-//deactivate user
+  //deactivate user
   User.deactivate = (id, callback) => {
     User.findById(id).then(user => {
       user.status = 'deactivated';
@@ -143,7 +143,7 @@ module.exports = function (User) {
         arg: 'id',
         type: 'number',
         description: 'User ID',
-        http: {source: 'path'},
+        http: { source: 'path' },
       }
     ],
     returns: [
@@ -156,7 +156,7 @@ module.exports = function (User) {
 
 
 
-//activate user
+  //activate user
   User.activate = (id, callback) => {
     User.findById(id).then(user => {
       user.status = 'active';
@@ -174,7 +174,7 @@ module.exports = function (User) {
         arg: 'id',
         type: 'number',
         description: 'User ID',
-        http: {source: 'path'},
+        http: { source: 'path' },
       }
     ],
     returns: [
@@ -183,6 +183,36 @@ module.exports = function (User) {
       }
     ]
   });
+
+  User.contactus = (data, callback) => {
+    User.app.models.Email.send({
+      to: "world.of.anas.95@gmail.com",
+      from: data.email,
+      subject: data.subject,
+      html: '<b>From : </b>'+data.email+'<br><p>'+data.message+'</p>'
+    }, function (err) {
+      if (err) return console.log('> error sending password reset email');
+      callback();
+    });
+  };
+
+  User.remoteMethod('contactus', {
+    http: {
+      path: '/contactUs', verb: 'post',
+    },
+    description: 'contact with dlaaal\'s admins',
+    accepts: [
+      { arg: 'data', type: 'object', http: { source: 'body' } }
+    ],
+    returns: [
+      {
+        arg: 'data', type: 'User', root: true,
+      }
+    ]
+  });
+  // {"email":"test",
+  // "title":"title",
+  // "message":"Messssssssage"}
 
   //get my info /me
   User.remoteMethod('me', {
@@ -199,6 +229,7 @@ module.exports = function (User) {
     ]
   });
 
+
   User.me = (callback) => {
     // const currentCtx = LoopBackContext.getCurrentContext();
     // const user = currentCtx.get('http').res.locals.user;
@@ -208,6 +239,16 @@ module.exports = function (User) {
       callback(errors.account.authorizationRequired());
     }
   };
+
+
+
+
+
+
+
+
+
+
 
   //Make Notification Read
   User.remoteMethod('makeNotificationRead', {
@@ -220,7 +261,7 @@ module.exports = function (User) {
         arg: 'id',
         type: 'string',
         description: 'User ID',
-        http: {source: 'path'},
+        http: { source: 'path' },
       }
     ],
     returns: []
@@ -230,7 +271,7 @@ module.exports = function (User) {
     // const user = currentCtx.get('http').res.locals.user;
     // if (userId === id) {
     //add Notification to DB
-    User.app.models.Notification.updateAll({ownerId: id}, {isRead: true})
+    User.app.models.Notification.updateAll({ ownerId: id }, { isRead: true })
       .then(() => callback(null))
       .catch(callback);
     // } else {
@@ -269,11 +310,11 @@ module.exports = function (User) {
       const followingIds = users.map(function (user) {
         return parseInt(user.id);
       });
-     if(followingIds[0]==context.req.params.fk){
-       console.log(followingIds.indexOf(parseInt(context.req.params.fk)));
-     }else{
-       console.log(false);       
-     }
+      if (followingIds[0] == context.req.params.fk) {
+        console.log(followingIds.indexOf(parseInt(context.req.params.fk)));
+      } else {
+        console.log(false);
+      }
       if (followingIds.indexOf(parseInt(context.req.params.fk)) === -1) {
         return next(errors.follow.notFollowed());
       } else {
@@ -288,6 +329,8 @@ module.exports = function (User) {
       user.save().then(() => next());
     }).catch(err => next(err));
   });
+
+
 
 };
 

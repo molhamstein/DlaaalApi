@@ -25,7 +25,8 @@
     "createdAt": {
       "type": "date",
       "defaultFn": "now"
-    },"name": {
+    },
+    "name": {
       "type": "string"
     }
   },

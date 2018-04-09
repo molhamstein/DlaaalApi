@@ -13,7 +13,8 @@
     "fields": {
       "type": [
         "Field"
-      ]
+      ],
+      "required": true
     }
   },
   "validations": [],

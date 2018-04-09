@@ -1,9 +1,9 @@
 {
   "restApiRoot": "/api",
   "host": "0.0.0.0",
-  "domain": "http://104.217.253.15:5000",
-  "siteDomain": "http://104.217.253.15:5000",
-  "port": 5000,
+  "domain": "http://104.217.253.15:7500",
+  "siteDomain": "http://104.217.253.15:7500",
+  "port": 7500,
   "remoting": {
     "context": false,
     "rest": {

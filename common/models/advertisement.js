@@ -108,8 +108,8 @@ module.exports = function (Advertisement) {
       // const locals = context.res.locals;
       // if (!(locals.user && (locals.rolesNames.indexOf('admin') !== -1 || advertisement.ownerId === context.req.accessToken.userId)) && advertisement.status !== 'active')
       //   return next(errors.advertisemet.notFound());
-
-      if (context.req.query.preventIncreaseViews) {
+      
+      if (context.req.query.preventIncreaseViews==null && (context.req.accessToken==null || advertisement.ownerId.toString() != context.req.accessToken.userId.toString())) {
         advertisement.viewsCount++;
         advertisement.save();
       }
@@ -188,12 +188,7 @@ module.exports = function (Advertisement) {
       },
       {
         arg: 'data',
-        type: `{
-        name:string,
-        email:string.
-        phone:string,
-        message:string
-        }`,
+        type: ``,
         description: ' send email to ads owner {email, name, phone, message}',
         http: { source: 'body' },
       }

@@ -36,6 +36,71 @@ module.exports = async function (app) {
     }
   ];
 
+  // {
+  //   "title": "عقارات 1",
+  //     "categoryId": "5aca09de93413215e8a33897",
+  //       "fields" = [
+  //         {
+  //           "key": "key1",
+  //           "type": "text",
+  //           "_id": "1-1-1"
+  //         },
+  //         {
+  //           "key": "key2",
+  //           "type": "text",
+  //           "_id": "1-1-2"
+  //         },
+  //         {
+  //           "key": "key3",
+  //           "type": "number",
+  //           "_id": "1-1-3"
+  //         },
+  //         {
+  //           "key": "key4",
+  //           "_id": "1-1-4",
+  //           "type": "choose",
+  //           "values": [
+  //             { "value": "value1", "fields": [], "_id": "1-1-4-1" },
+  //             { "value": "value1", "fields": [], "_id": "1-1-4-2", }
+  //           ]
+  //         }
+  //       }
+
+  //   {
+  //   "title": "عقارات",
+  //   "image": "string",
+  //   "id": "5aca09de93413215e8a33897",
+  //   "fields": [
+  //     {
+  //       "_id": "1-1-0",
+  //       "key": "key0",
+  //       "type": "choose",
+  //       "values": [
+  //         {
+  //           "value": "value1",
+  //           "fields": [
+  //             {
+  //               "_id": "1-1-0-1-0",
+  //               "key": "key0-1",
+  //               "type": "choose",
+  //               "values": [
+  //                 {
+  //                   "value": "value1-test",
+  //                   "fields": []
+  //                 }
+  //               ]
+  //             }
+  //           ]
+  //         },
+  //         {
+  //           "value": "value2",
+  //           "fields": []
+  //         }
+  //       ]
+  //     }
+  //   ]
+  // }
+
   const carFields = [
     {
       key: 'نوع السيارة',
@@ -182,59 +247,58 @@ module.exports = async function (app) {
         });
       });
 
-      const categories = await app.models.Category.create([
-        {
-          title: 'عقارات',
-          image: images[0]
-        },
-        {
-          title: 'مركبات',
-          image: images[0],
-          fields: carFields
-        },
-        {
-          title: 'متفرقات',
-          image: images[0]
-        },
-        {
-          title: 'أشياء مجانية',
-          image: images[0]
-        },
-      ]);
-      // console.log('Created categories: ', categories);
+      // const categories = await app.models.Category.create([
+      // {
+      //   title: 'عقارات',
+      //   image: images[0]
+      // },
+      //   {
+      //     title: 'مركبات',
+      //     image: images[0],
+      //     fields: carFields
+      //   },
+      //   {
+      //     title: 'متفرقات',
+      //     image: images[0]
+      //   },
+      //   {
+      //     title: 'أشياء مجانية',
+      //     image: images[0]
+      //   },
+      // ]);
 
-      let subCategories = await app.models.SubCategory.create([
-        {
-          title: 'عقارات 1',
-          categoryId: categories.find(o => o.title === 'عقارات').id,
-          fields: fields
-        },
-        {
-          title: 'عقارات 2',
-          categoryId: categories.find(o => o.title === 'عقارات').id,
-          fields: fields
-        },
-        {
-          title: 'مركبات 1',
-          categoryId: categories.find(o => o.title === 'مركبات').id,
-          fields: fields
-        },
-        {
-          title: 'عقارات 1',
-          categoryId: categories.find(o => o.title === 'عقارات').id,
-          fields: fields
-        },
-        {
-          title: 'متفرقات 1',
-          categoryId: categories.find(o => o.title === 'متفرقات').id,
-          fields: fields
-        },
-        {
-          title: 'أشياء مجانية 1',
-          categoryId: categories.find(o => o.title === 'أشياء مجانية').id,
-          fields: fields
-        }
-      ]);
+      // let subCategories = await app.models.SubCategory.create([
+      // {
+      //   title: 'عقارات 1',
+      //   categoryId: categories.find(o => o.title === 'عقارات').id,
+      //   fields: fields
+      // },
+      //   {
+      //     title: 'عقارات 2',
+      //     categoryId: categories.find(o => o.title === 'عقارات').id,
+      //     fields: fields
+      //   },
+      //   {
+      //     title: 'مركبات 1',
+      //     categoryId: categories.find(o => o.title === 'مركبات').id,
+      //     fields: fields
+      //   },
+      //   {
+      //     title: 'عقارات 1',
+      //     categoryId: categories.find(o => o.title === 'عقارات').id,
+      //     fields: fields
+      //   },
+      //   {
+      //     title: 'متفرقات 1',
+      //     categoryId: categories.find(o => o.title === 'متفرقات').id,
+      //     fields: fields
+      //   },
+      //   {
+      //     title: 'أشياء مجانية 1',
+      //     categoryId: categories.find(o => o.title === 'أشياء مجانية').id,
+      //     fields: fields
+      //   }
+      // ]);
       // console.log('Created subCategories: ', subCategories);
 
       //custome2 follow customer 1
@@ -340,3 +404,170 @@ module.exports = async function (app) {
     throw err;
   }
 };
+
+
+
+
+
+// Car Category= {
+//   "title": "مركبات",
+//   "image": "string",
+//   "fields": [
+//     {
+//       "key": "نوع السيارة",
+//       "type": "choose",
+//       "_id": "2-0",
+//       "values": [
+//         {
+//           "value": "Kia",
+//           "fields": [
+//             {
+//               "_id": "2-0-1",
+//               "key": "نوع السيارة",
+//               "type": "choose",
+//               "values": [
+//                 {
+//                   "value": "Rio 1",
+//                   "fields": []
+//                 },
+//                 {
+//                   "value": "Rio 2",
+//                   "fields": []
+//                 },
+//                 {
+//                   "value": "Rio 3",
+//                   "fields": []
+//                 }
+//               ]
+//             }
+//           ]
+//         },
+//         {
+//           "value": "Ford",
+//           "fields": [
+//             {
+//               "_id": "2-0-2",
+//               "key": "نوع السيارة",
+//               "type": "choose",
+//               "values": [
+//                 {
+//                   "value": "mustang 1",
+//                   "fields": []
+//                 },
+//                 {
+//                   "value": "mustang 2",
+//                   "fields": []
+//                 },
+//                 {
+//                   "value": "mustang 3",
+//                   "fields": []
+//                 }
+//               ]
+//             }
+//           ]
+//         },
+//         {
+//           "value": "Mercedes",
+//           "fields": [
+//             {
+//               "_id": "2-0-3",
+//               "key": "Mercedes نوع السيارة",
+//               "type": "choose",
+//               "values": [
+//                 {
+//                   "value": "amg 1",
+//                   "fields": []
+//                 },
+//                 {
+//                   "value": "amg 2",
+//                   "fields": []
+//                 },
+//                 {
+//                   "value": "amg 3",
+//                   "fields": []
+//                 }
+//               ]
+//             }
+//           ]
+//         }
+//       ]
+//     }
+//   ]
+// }
+
+
+
+// Building Category =[
+//   {
+//     "title": "عقارات",
+//     "image": "string",
+//     "fields": [
+//       {
+//         "_id": "1-0",
+//         "key": "key0",
+//         "type": "choose",
+//         "values": [
+//           {
+//             "value": "value1",
+//             "fields": [
+//               {
+//                 "_id": "1-0-1",
+//                 "key": "key0-1",
+//                 "type": "choose",
+//                 "values": [
+//                   {
+//                     "value": "value1-test",
+//                     "fields": []
+//                   }
+//                 ]
+//               }
+//             ]
+//           },
+//           {
+//             "value": "value2",
+//             "fields": []
+//           }
+//         ]
+//       }
+//     ]
+//   }
+// ]
+
+// buillding Subcategory 1=[
+  // {
+  //   "categoryId": "5acb4990379572231c24e3e2",
+  //   "title": "عقارات 1",
+  //   "fields": [
+  //     {
+  //       "_id": "1-S1-0",
+  //       "key": "key1",
+  //       "type": "text"
+  //     },
+  //     {
+  //       "_id": "1-S1-1",
+  //       "key": "key2",
+  //       "type": "text"
+  //     },
+  //     {
+  //       "_id": "1-S1-2",
+  //       "key": "key3",
+  //       "type": "number"
+  //     },
+  //     {
+  //       "_id": "1-S1-3",
+  //       "key": "key4",
+  //       "type": "choose",
+  //       "values": [
+  //         {
+  //           "value": "value1",
+  //           "fields": [],
+  //         },
+  //         {
+  //           "value": "value2",
+  //           "fields": [],
+  //         }
+  //       ]
+  //     }
+  //   ]
+  // }
+// ]
