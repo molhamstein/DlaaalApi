@@ -498,39 +498,39 @@ module.exports = async function (app) {
 
 
 // Building Category =[
-//   {
-//     "title": "عقارات",
-//     "image": "string",
-//     "fields": [
-//       {
-//         "_id": "1-0",
-//         "key": "key0",
-//         "type": "choose",
-//         "values": [
-//           {
-//             "value": "value1",
-//             "fields": [
-//               {
-//                 "_id": "1-0-1",
-//                 "key": "key0-1",
-//                 "type": "choose",
-//                 "values": [
-//                   {
-//                     "value": "value1-test",
-//                     "fields": []
-//                   }
-//                 ]
-//               }
-//             ]
-//           },
-//           {
-//             "value": "value2",
-//             "fields": []
-//           }
-//         ]
-//       }
-//     ]
-//   }
+  // {
+  //   "title": "عقارات",
+  //   "image": "string",
+  //   "fields": [
+  //     {
+  //       "_id": "1-0",
+  //       "key": "key0",
+  //       "type": "choose",
+  //       "values": [
+  //         {
+  //           "value": "value1",
+  //           "fields": [
+  //             {
+  //               "_id": "1-0-1",
+  //               "key": "key0-1",
+  //               "type": "choose",
+  //               "values": [
+  //                 {
+  //                   "value": "value1-test",
+  //                   "fields": []
+  //                 }
+  //               ]
+  //             }
+  //           ]
+  //         },
+  //         {
+  //           "value": "value2",
+  //           "fields": []
+  //         }
+  //       ]
+  //     }
+  //   ]
+  // }
 // ]
 
 // buillding Subcategory 1=[
