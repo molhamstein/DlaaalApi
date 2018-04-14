@@ -64,6 +64,11 @@ module.exports = function (Advertisement) {
     }).catch(err => next(err));
   });
 
+  Advertisement.beforeRemote('__create__reports', function (context, user, next) {
+    console.log("DDDDDD");
+      next();    
+  });
+
   Advertisement.beforeRemote('create', function (context, result, next) {
     // const currentCtx = LoopBackContext.getCurrentContext();
     if (context.res.locals.user.status !== 'active') {
@@ -81,6 +86,8 @@ module.exports = function (Advertisement) {
     user.save();
     next();
   });
+
+
   Advertisement.afterRemote('deleteById', function (context, advertisement, next) {
     // const currentCtx = LoopBackContext.getCurrentContext();
     // const user = currentCtx ? currentCtx.get('http').res.locals.user : 0;
@@ -108,8 +115,8 @@ module.exports = function (Advertisement) {
       // const locals = context.res.locals;
       // if (!(locals.user && (locals.rolesNames.indexOf('admin') !== -1 || advertisement.ownerId === context.req.accessToken.userId)) && advertisement.status !== 'active')
       //   return next(errors.advertisemet.notFound());
-      
-      if (context.req.query.preventIncreaseViews==null && (context.req.accessToken==null || advertisement.ownerId.toString() != context.req.accessToken.userId.toString())) {
+
+      if (context.req.query.preventIncreaseViews == null && (context.req.accessToken == null || advertisement.ownerId.toString() != context.req.accessToken.userId.toString())) {
         advertisement.viewsCount++;
         advertisement.save();
       }
@@ -232,11 +239,11 @@ module.exports = function (Advertisement) {
           if (element.subCategoryId != null && element.subCategoryId != tempAdvertisement.subCategoryId) {
             return;
           }
-            console.log("element.maxPrice");
-            console.log(element.maxPrice);
-            console.log("tempAdvertisement.price");
-            console.log(tempAdvertisement.price);
-          
+          console.log("element.maxPrice");
+          console.log(element.maxPrice);
+          console.log("tempAdvertisement.price");
+          console.log(tempAdvertisement.price);
+
           if (element.maxPrice != null && element.maxPrice <= tempAdvertisement.price) {
             console.log("MaxPriceErrore");
             return;
@@ -257,7 +264,7 @@ module.exports = function (Advertisement) {
             var indexFieldSearch = 0;
             var isPassed = true;
             tempFields.forEach(function (fieldElement) {
-              var fieldInSearch=element.fields.find(x => x._id == fieldElement._id);
+              var fieldInSearch = element.fields.find(x => x._id == fieldElement._id);
               if (fieldInSearch != null) {
                 if (fieldElement.value == fieldInSearch.value) {
                   indexFieldSearch++;
