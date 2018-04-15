@@ -141,9 +141,9 @@
     },
     {
       "principalType": "ROLE",
-      "principalId": "$authenticated",
+      "principalId": "$everyone",
       "permission": "ALLOW",
-      "property": "prototype.__create__reports"
+      "property": "__create__reports"
     },
     {
       "accessType": "*",

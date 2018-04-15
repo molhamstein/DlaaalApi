@@ -64,10 +64,7 @@ module.exports = function (Advertisement) {
     }).catch(err => next(err));
   });
 
-  Advertisement.beforeRemote('__create__reports', function (context, user, next) {
-    console.log("DDDDDD");
-      next();    
-  });
+
 
   Advertisement.beforeRemote('create', function (context, result, next) {
     // const currentCtx = LoopBackContext.getCurrentContext();

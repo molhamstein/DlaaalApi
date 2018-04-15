@@ -7,10 +7,10 @@
   },
   "forceId": true,
   "properties": {
-    "_id":{
-      "type":"string",
-      "id":true,
-      "generated":true
+    "_id": {
+      "type": "string",
+      "id": true,
+      "generated": true
     },
     "key": {
       "type": "string",
