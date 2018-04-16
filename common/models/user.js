@@ -189,7 +189,7 @@ module.exports = function (User) {
       to: "world.of.anas.95@gmail.com",
       from: data.email,
       subject: data.subject,
-      html: '<b>From : </b>'+data.email+'<br><p>'+data.message+'</p>'
+      html: '<b>From : </b>' + data.email + '<br><p>' + data.message + '</p>'
     }, function (err) {
       if (err) return console.log('> error sending password reset email');
       callback();
@@ -253,7 +253,7 @@ module.exports = function (User) {
   //Make Notification Read
   User.remoteMethod('makeNotificationRead', {
     http: {
-      path: '/:id/mak-notifications-read', verb: 'put'
+      path: '/:id/mak-notifications-read/:notificationId', verb: 'put'
     },
     description: 'Make My Notification Read',
     accepts: [
@@ -262,18 +262,40 @@ module.exports = function (User) {
         type: 'string',
         description: 'User ID',
         http: { source: 'path' },
+      }, {
+        arg: 'notificationId',
+        type: 'string',
+        description: 'Notification ID',
+        http: { source: 'path' },
       }
     ],
     returns: []
   });
-  User.makeNotificationRead = (id, callback) => {
+  User.makeNotificationRead = (id, notificationId, callback) => {
     // const currentCtx = LoopBackContext.getCurrentContext();
     // const user = currentCtx.get('http').res.locals.user;
     // if (userId === id) {
     //add Notification to DB
-    User.app.models.Notification.updateAll({ ownerId: id }, { isRead: true })
-      .then(() => callback(null))
-      .catch(callback);
+    // Shalabe Code 
+    // User.app.models.Notification.updateAll({ ownerId: id }, { id: notificationId }, { isRead: true })
+    //   .then(() => callback(null))
+    //   .catch(callback);
+
+    User.app.models.Notification.findById(notificationId).then(item => {
+      item.isRead = true;
+      item.save().then(() => callback(null));
+    }).catch(callback);
+
+    // User.app.models.Notification.findOne({ id: notificationId }, function (err, item) {
+    //   if (err)
+    //     console.log("something Error");
+    //   else {
+    //     console.log(item);
+    //     item.isRead = true;
+    //     item.save();
+    //     callback();
+    //   }
+    // });
     // } else {
     //   callback(errors.account.authorizationRequired());
     // }

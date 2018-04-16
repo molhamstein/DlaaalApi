@@ -159,7 +159,7 @@
   },
   "advertisementReport": {
     "dataSource": "db",
-    "public": true
+    "public": false
   },
   "Bookmark": {
     "dataSource": "db",

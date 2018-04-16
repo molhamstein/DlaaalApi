@@ -396,6 +396,202 @@ module.exports = async function (app) {
       //   advertisementId: ads[0].id,
       //   ownerId: customer2.id
       // });
+
+      const categories = await app.models.Category.create([
+        {
+          "title": "مركبات",
+          "image": "string",
+          "fields": [
+            {
+              "key": "نوع السيارة",
+              "type": "choose",
+              "_id": "2-0",
+              "values": [
+                {
+                  "value": "Kia",
+                  "fields": [
+                    {
+                      "_id": "2-0-1",
+                      "key": "نوع السيارة",
+                      "type": "choose",
+                      "values": [
+                        {
+                          "value": "Rio 1",
+                          "fields": []
+                        },
+                        {
+                          "value": "Rio 2",
+                          "fields": []
+                        },
+                        {
+                          "value": "Rio 3",
+                          "fields": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "value": "Ford",
+                  "fields": [
+                    {
+                      "_id": "2-0-2",
+                      "key": "نوع السيارة",
+                      "type": "choose",
+                      "values": [
+                        {
+                          "value": "mustang 1",
+                          "fields": []
+                        },
+                        {
+                          "value": "mustang 2",
+                          "fields": []
+                        },
+                        {
+                          "value": "mustang 3",
+                          "fields": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "value": "Mercedes",
+                  "fields": [
+                    {
+                      "_id": "2-0-3",
+                      "key": "Mercedes نوع السيارة",
+                      "type": "choose",
+                      "values": [
+                        {
+                          "value": "amg 1",
+                          "fields": []
+                        },
+                        {
+                          "value": "amg 2",
+                          "fields": []
+                        },
+                        {
+                          "value": "amg 3",
+                          "fields": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "عقارات",
+          "image": "string",
+          "fields": [
+            {
+              "_id": "1-0",
+              "key": "key0",
+              "type": "choose",
+              "values": [
+                {
+                  "value": "value1",
+                  "fields": [
+                    {
+                      "_id": "1-0-1",
+                      "key": "key0-1",
+                      "type": "choose",
+                      "values": [
+                        {
+                          "value": "value1-test",
+                          "fields": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "value": "value2",
+                  "fields": []
+                }
+              ]
+            }
+          ]
+        }
+      ])
+
+      let subCategories = await app.models.SubCategory.create([
+        {
+          "categoryId": categories.find(o => o.title === 'عقارات').id,
+          "title": "عقارات 1",
+          "fields": [
+            {
+              "_id": "1-S1-0",
+              "key": "key1",
+              "type": "text"
+            },
+            {
+              "_id": "1-S1-1",
+              "key": "key2",
+              "type": "text"
+            },
+            {
+              "_id": "1-S1-2",
+              "key": "key3",
+              "type": "number"
+            },
+            {
+              "_id": "1-S1-3",
+              "key": "key4",
+              "type": "choose",
+              "values": [
+                {
+                  "value": "value1",
+                  "fields": []
+                },
+                {
+                  "value": "value2",
+                  "fields": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "categoryId": categories.find(o => o.title === 'مركبات').id,
+          "title": "مركبات 1",
+          "fields": [
+            {
+              "_id": "1-S1-0",
+              "key": "key1",
+              "type": "text"
+            },
+            {
+              "_id": "1-S1-1",
+              "key": "key2",
+              "type": "text"
+            },
+            {
+              "_id": "1-S1-2",
+              "key": "key3",
+              "type": "number"
+            },
+            {
+              "_id": "1-S1-3",
+              "key": "key4",
+              "type": "choose",
+              "values": [
+                {
+                  "value": "value1",
+                  "fields": []
+                },
+                {
+                  "value": "value2",
+                  "fields": []
+                }
+              ]
+            }
+          ]
+        }
+      ])
       console.log('seedData: DONE!');
     }
 
@@ -409,7 +605,8 @@ module.exports = async function (app) {
 
 
 
-// Car Category= {
+// Car Category=
+//  {
 //   "title": "مركبات",
 //   "image": "string",
 //   "fields": [
@@ -533,41 +730,42 @@ module.exports = async function (app) {
   // }
 // ]
 
-// buillding Subcategory 1=[
-  // {
-  //   "categoryId": "5acb7a18ed2a922cbc3ab15e",
-  //   "title": "عقارات 1",
-  //   "fields": [
-  //     {
-  //       "_id": "1-S1-0",
-  //       "key": "key1",
-  //       "type": "text"
-  //     },
-  //     {
-  //       "_id": "1-S1-1",
-  //       "key": "key2",
-  //       "type": "text"
-  //     },
-  //     {
-  //       "_id": "1-S1-2",
-  //       "key": "key3",
-  //       "type": "number"
-  //     },
-  //     {
-  //       "_id": "1-S1-3",
-  //       "key": "key4",
-  //       "type": "choose",
-  //       "values": [
-  //         {
-  //           "value": "value1",
-  //           "fields": [],
-  //         },
-  //         {
-  //           "value": "value2",
-  //           "fields": [],
-  //         }
-  //       ]
-  //     }
-  //   ]
-  // }
+// buillding Subcategory 1=
+// [
+//   {
+//     "categoryId": "5ad377fa681922336c8fcd2c",
+//     "title": "عقارات 1",
+//     "fields": [
+//       {
+//         "_id": "1-S1-0",
+//         "key": "key1",
+//         "type": "text"
+//       },
+//       {
+//         "_id": "1-S1-1",
+//         "key": "key2",
+//         "type": "text"
+//       },
+//       {
+//         "_id": "1-S1-2",
+//         "key": "key3",
+//         "type": "number"
+//       },
+//       {
+//         "_id": "1-S1-3",
+//         "key": "key4",
+//         "type": "choose",
+//         "values": [
+//           {
+//             "value": "value1",
+//             "fields": []
+//           },
+//           {
+//             "value": "value2",
+//             "fields": []
+//           }
+//         ]
+//       }
+//     ]
+//   }
 // ]

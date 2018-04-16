@@ -220,74 +220,74 @@ module.exports = function (Advertisement) {
             .catch(err => console.log(err));
         });
       }
+      // console.log(Advertisement.app.models.Search.find());
+      Advertisement.app.models.Search.find().then(Searches => {
+        console.log(ctx.instance.ownerId);
+        var letUserID = []
+        Searches.forEach(function (element) {
+          if (letUserID[element.ownerId] == null && ctx.instance.ownerId != element.ownerId) {
+            var tempAdvertisement = ctx.instance;
+            if (element.categoryId != null && element.categoryId != tempAdvertisement.categoryId) {
+              return;
+            }
+            if (element.subCategoryId != null && element.subCategoryId != tempAdvertisement.subCategoryId) {
+              return;
+            }
+            console.log("element.maxPrice");
+            console.log(element.maxPrice);
+            console.log("tempAdvertisement.price");
+            console.log(tempAdvertisement.price);
 
+            if (element.maxPrice != null && element.maxPrice <= tempAdvertisement.price) {
+              console.log("MaxPriceErrore");
+              return;
+            }
+            if (element.minPrice != null && element.minPrice >= tempAdvertisement.price) {
+              return;
+            }
+
+            if (element.title != null && tempAdvertisement.title.indexOf(element.title) == -1) {
+              return;
+            }
+
+            if (element.cityId != null && element.cityId != tempAdvertisement.cityId) {
+              return;
+            }
+            if (element.fields) {
+              var tempFields = tempAdvertisement.fields;
+              var indexFieldSearch = 0;
+              var isPassed = true;
+              tempFields.forEach(function (fieldElement) {
+                var fieldInSearch = element.fields.find(x => x._id == fieldElement._id);
+                if (fieldInSearch != null) {
+                  if (fieldElement.value == fieldInSearch.value) {
+                    indexFieldSearch++;
+                  } else {
+                    isPassed = false;
+                    return false;
+                  }
+                }
+              }, this);
+              if (isPassed == false || indexFieldSearch != element.fields.length)
+                return
+            }
+            var notification = {
+              advertisementId: ctx.instance.id,
+              ownerId: element.ownerId,
+              type: 'SEARCH_ADS',
+              name: element.name
+            };
+            Advertisement.app.models.Notification.create(notification)
+              .then()
+              .catch(err => console.log(err));
+
+            letUserID[element.ownerId] = true;
+          }
+        }, this);
+      });
     }
 
-    // console.log(Advertisement.app.models.Search.find());
-    Advertisement.app.models.Search.find().then(Searches => {
-      console.log(ctx.instance.ownerId);
-      var letUserID = []
-      Searches.forEach(function (element) {
-        if (letUserID[element.ownerId] == null && ctx.instance.ownerId != element.ownerId) {
-          var tempAdvertisement = ctx.instance;
-          if (element.categoryId != null && element.categoryId != tempAdvertisement.categoryId) {
-            return;
-          }
-          if (element.subCategoryId != null && element.subCategoryId != tempAdvertisement.subCategoryId) {
-            return;
-          }
-          console.log("element.maxPrice");
-          console.log(element.maxPrice);
-          console.log("tempAdvertisement.price");
-          console.log(tempAdvertisement.price);
 
-          if (element.maxPrice != null && element.maxPrice <= tempAdvertisement.price) {
-            console.log("MaxPriceErrore");
-            return;
-          }
-          if (element.minPrice != null && element.minPrice >= tempAdvertisement.price) {
-            return;
-          }
-
-          if (element.title != null && tempAdvertisement.title.indexOf(element.title) == -1) {
-            return;
-          }
-
-          if (element.cityId != null && element.cityId != tempAdvertisement.cityId) {
-            return;
-          }
-          if (element.fields) {
-            var tempFields = tempAdvertisement.fields;
-            var indexFieldSearch = 0;
-            var isPassed = true;
-            tempFields.forEach(function (fieldElement) {
-              var fieldInSearch = element.fields.find(x => x._id == fieldElement._id);
-              if (fieldInSearch != null) {
-                if (fieldElement.value == fieldInSearch.value) {
-                  indexFieldSearch++;
-                } else {
-                  isPassed = false;
-                  return false;
-                }
-              }
-            }, this);
-            if (isPassed == false || indexFieldSearch != element.fields.length)
-              return
-          }
-          var notification = {
-            advertisementId: ctx.instance.id,
-            ownerId: element.ownerId,
-            type: 'SEARCH_ADS',
-            name: element.name
-          };
-          Advertisement.app.models.Notification.create(notification)
-            .then()
-            .catch(err => console.log(err));
-
-          letUserID[element.ownerId] = true;
-        }
-      }, this);
-    });
     next();
   });
 };

@@ -40,12 +40,6 @@
     }
   },
   "acls": [
-    {
-      "accessType": "WRITE",
-      "principalType": "ROLE",
-      "principalId": "$authenticated",
-      "permission": "ALLOW"
-    }
   ],
   "methods": {}
 }
