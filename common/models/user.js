@@ -23,7 +23,7 @@ module.exports = function (User) {
     var options = {
       type: 'email',
       to: user.email,
-      from: 'dlaaalsite@gmail.com',
+      from: 'mhd.algkharavi@gmail.com',
       subject: subject,
       message: message,
       template: path.resolve(__dirname, '../../server/views/verify-template.ejs'),
