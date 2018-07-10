@@ -23,7 +23,7 @@ module.exports = function (User) {
     var options = {
       type: 'email',
       to: user.email,
-      from: 'world.of.anas.95@gmail.com',
+      from: 'dlaaalsite@gmail.com',
       subject: subject,
       message: message,
       template: path.resolve(__dirname, '../../server/views/verify-template.ejs'),
@@ -188,7 +188,7 @@ module.exports = function (User) {
 
   User.contactus = (data, callback) => {
     User.app.models.Email.send({
-      to: "world.of.anas.95@gmail.com",
+      to: "dlaaalsite@gmail.com",
       from: data.email,
       subject: data.subject,
       html: '<b>From : </b>' + data.email + '<br><p>' + data.message + '</p>'
