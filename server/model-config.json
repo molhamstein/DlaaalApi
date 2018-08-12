@@ -212,7 +212,7 @@
   },
   "Notification": {
     "dataSource": "db",
-    "public": false
+    "public": true
   },
   "option": {
     "dataSource": "db",
