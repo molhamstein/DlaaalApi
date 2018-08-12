@@ -28,6 +28,10 @@
       "type": [
         "option"
       ]
+    },
+    "isInFilter": {
+      "type": "Boolean",
+      "default": "true"
     }
   },
   "validations": [],
