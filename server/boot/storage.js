@@ -9,6 +9,6 @@ module.exports = function (app) {
   };
 
   app.dataSources.storage.connector.allowedContentTypes = ["image/jpg", "image/jpeg", "image/png"];
-  app.dataSources.storage.connector.maxFileSize = 1000000;
+  app.dataSources.storage.connector.maxFileSize = 9999999999999999999999999999999999999999999999999999999;
 
 };
