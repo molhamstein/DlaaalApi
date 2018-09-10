@@ -1,7 +1,6 @@
 'use strict';
 const configPath = process.env.NODE_ENV === undefined ? '../../server/config.json' : `../../server/config.${process.env.NODE_ENV}.json`;
 const config = require(configPath);
-var watermark = require('dynamic-watermark');
 const path = require('path');
 var images = require("images");
 var sizeOf = require('image-size');
@@ -12,7 +11,7 @@ module.exports = function (FileContainer) {
   FileContainer.afterRemote('upload', function (context, result, next) {
     let src = path.join(__dirname, '../../files/');
     var folderName = context.req.params.container;
-    var logoUrl = src + "logo1.PNG"
+    var logoUrl = src + "logo.PNG"
 
     var dimensionsLogo = sizeOf(logoUrl);
     var logoRate = dimensionsLogo.height / dimensionsLogo.width;
