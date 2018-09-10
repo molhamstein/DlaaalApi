@@ -215,9 +215,9 @@ module.exports = function (Advertisement) {
           //add Notification to DB
           console.log("notitications");
           console.log(notitications);
-          // Advertisement.app.models.Notification.create(notitications)
-          //   .then()
-          //   .catch(err => console.log(err));
+          Advertisement.app.models.Notification.create(notitications)
+            .then()
+            .catch(err => console.log(err));
         });
       }
       // console.log(Advertisement.app.models.Search.find());
