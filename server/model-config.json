@@ -167,7 +167,7 @@
   },
   "Follow": {
     "dataSource": "db",
-    "public": false
+    "public": true
   },
   "FileContainer": {
     "dataSource": "storage",

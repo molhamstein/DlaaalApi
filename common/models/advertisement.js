@@ -202,8 +202,6 @@ module.exports = function (Advertisement) {
   //for send notification
   Advertisement.observe('after save', function (ctx, next) {
     if (ctx.isNewInstance) {
-      // const currentCtx = LoopBackContext.getCurrentContext();
-      // const locals = currentCtx ? currentCtx.get('http').res.locals : {};
       const user = Advertisement.app.currentUser;
       if (user && user.followers) {
         user.followers.find({}).then(users => {
@@ -215,9 +213,11 @@ module.exports = function (Advertisement) {
             };
           });
           //add Notification to DB
-          Advertisement.app.models.Notification.create(notitications)
-            .then()
-            .catch(err => console.log(err));
+          console.log("notitications");
+          console.log(notitications);
+          // Advertisement.app.models.Notification.create(notitications)
+          //   .then()
+          //   .catch(err => console.log(err));
         });
       }
       // console.log(Advertisement.app.models.Search.find());
