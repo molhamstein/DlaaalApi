@@ -80,6 +80,7 @@
           "contactus": true,
           "makeNotificationRead": true,
           "find": true,
+          "loginFacebook": true,
           "deactivate": true,
           "activate": true,
           "updateAttributes": true,

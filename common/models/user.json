@@ -24,11 +24,15 @@
       "required": false
     },
     "phone": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "website": {
       "type": "string"
+    },
+    "registrationCompleted": {
+      "type": "boolean",
+      "required": true,
+      "default": "true"
     },
     "followersCount": {
       "type": "number",
@@ -45,6 +49,13 @@
     "isFollowed": {
       "type": "boolean",
       "default": false
+    },
+    "typeLogIn": {
+      "type": "string",
+      "default": "registration"
+    },
+    "socialId": {
+      "type": "string"
     }
   },
   "validations": [],
@@ -112,8 +123,7 @@
       }
     }
   },
-  "acls": [
-    {
+  "acls": [{
       "principalType": "ROLE",
       "principalId": "$everyone",
       "permission": "DENY"
@@ -177,6 +187,12 @@
       "principalType": "ROLE",
       "principalId": "$everyone",
       "permission": "ALLOW",
+      "property": "loginFacebook"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
       "property": "contactus"
     },
     {
@@ -186,5 +202,28 @@
       "permission": "ALLOW"
     }
   ],
-  "methods": {}
+  "methods": {
+    "loginFacebook": {
+      "accepts": [{
+        "arg": "data",
+        "type": "object",
+        "required": true,
+        "description": "",
+        "http": {
+          "source": "body"
+        }
+      }],
+      "returns": [{
+        "arg": "result",
+        "type": "object",
+        "root": true,
+        "description": ""
+      }],
+      "description": "",
+      "http": [{
+        "path": "/facebookLogin",
+        "verb": "post"
+      }]
+    }
+  }
 }

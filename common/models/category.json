@@ -14,6 +14,10 @@
     "image": {
       "type": "string"
     },
+    "isFree": {
+      "type": "boolean",
+      "default": false
+    },
     "fields": {
       "type": [
         "Field"
@@ -28,8 +32,7 @@
       "foreignKey": "categoryId"
     }
   },
-  "acls": [
-    {
+  "acls": [{
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "$everyone",

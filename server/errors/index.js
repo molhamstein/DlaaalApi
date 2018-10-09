@@ -13,6 +13,9 @@ module.exports.account = {
   notActive: function () {
     return new cError('NOT_ACTIVE_USER', 404, 'User not active', 403);
   },
+    notHasPhone: function () {
+    return new cError('NOT_HAS_PHONE', 405, 'User hasn\'t phone', 405);
+  },
   emailNotValid: function () {
     return new cError('EMAIL_NOT_VALID', 400, 'Email not valid', 400);
   }

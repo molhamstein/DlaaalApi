@@ -8,8 +8,17 @@ const config = require(configPath);
 const LoopBackContext = require('loopback-context');
 const errors = require('../../server/errors');
 
+const download = require('image-downloader')
+
+
+
 module.exports = function (User) {
   //status pending/active/deactivated
+
+  var urlFileRoot = config.domain + config.restApiRoot + "/files";
+
+  // ulr save depend of folder name
+  var urlFileRootSave = urlFileRoot + '/profile/download/'
 
   User.disableRemoteMethodByName('prototype.__count__notifications');
   User.disableRemoteMethodByName('prototype.__create__notifications');
@@ -31,7 +40,7 @@ module.exports = function (User) {
     };
 
     // options.verifyHref = "http://104.217.253.15/dlaaalAppDevelop/Dlaaal-webApp/dist/#" +
-    options.verifyHref = "http://dlaaal.com/#" +    
+    options.verifyHref = "http://dlaaal.com/#" +
       '/login/verify' +
       '?uid=' + options.user.id;
     user.verify(options, function (err, res) {
@@ -106,7 +115,9 @@ module.exports = function (User) {
     // let url = `${config.siteDomain}/login/reset-password?access_token=${info.accessToken.id}&user_id=${info.user.id}`;
     // let url = "http://104.217.253.15/dlaaalAppDevelop/Dlaaal-webApp/dist/#" + `/login/reset-password?access_token=${info.accessToken.id}&user_id=${info.user.id}`;
     let url = "http://dlaaal.com/#" + `/login/reset-password?access_token=${info.accessToken.id}&user_id=${info.user.id}`;
-    ejs.renderFile(path.resolve(__dirname + "../../../server/views/reset-password-template.ejs"), { url: url }, function (err, html) {
+    ejs.renderFile(path.resolve(__dirname + "../../../server/views/reset-password-template.ejs"), {
+      url: url
+    }, function (err, html) {
       if (err) return console.log('> error sending password reset email', err);
       User.app.models.Email.send({
         to: info.email,
@@ -137,22 +148,23 @@ module.exports = function (User) {
 
   User.remoteMethod('deactivate', {
     http: {
-      path: '/:id/deactivate', verb: 'put',
+      path: '/:id/deactivate',
+      verb: 'put',
     },
     description: 'Deactivate user',
-    accepts: [
-      {
-        arg: 'id',
-        type: 'number',
-        description: 'User ID',
-        http: { source: 'path' },
-      }
-    ],
-    returns: [
-      {
-        arg: 'data', type: 'User', root: true,
-      }
-    ]
+    accepts: [{
+      arg: 'id',
+      type: 'number',
+      description: 'User ID',
+      http: {
+        source: 'path'
+      },
+    }],
+    returns: [{
+      arg: 'data',
+      type: 'User',
+      root: true,
+    }]
   });
 
 
@@ -168,22 +180,23 @@ module.exports = function (User) {
 
   User.remoteMethod('activate', {
     http: {
-      path: '/:id/activate', verb: 'put',
+      path: '/:id/activate',
+      verb: 'put',
     },
     description: 'Ativate user',
-    accepts: [
-      {
-        arg: 'id',
-        type: 'number',
-        description: 'User ID',
-        http: { source: 'path' },
-      }
-    ],
-    returns: [
-      {
-        arg: 'data', type: 'User', root: true,
-      }
-    ]
+    accepts: [{
+      arg: 'id',
+      type: 'number',
+      description: 'User ID',
+      http: {
+        source: 'path'
+      },
+    }],
+    returns: [{
+      arg: 'data',
+      type: 'User',
+      root: true,
+    }]
   });
 
   User.contactus = (data, callback) => {
@@ -200,17 +213,22 @@ module.exports = function (User) {
 
   User.remoteMethod('contactus', {
     http: {
-      path: '/contactUs', verb: 'post',
+      path: '/contactUs',
+      verb: 'post',
     },
     description: 'contact with dlaaal\'s admins',
-    accepts: [
-      { arg: 'data', type: 'object', http: { source: 'body' } }
-    ],
-    returns: [
-      {
-        arg: 'data', type: 'User', root: true,
+    accepts: [{
+      arg: 'data',
+      type: 'object',
+      http: {
+        source: 'body'
       }
-    ]
+    }],
+    returns: [{
+      arg: 'data',
+      type: 'User',
+      root: true,
+    }]
   });
   // {"email":"test",
   // "title":"title",
@@ -219,16 +237,16 @@ module.exports = function (User) {
   //get my info /me
   User.remoteMethod('me', {
     http: {
-      path: '/me', verb: 'get'
+      path: '/me',
+      verb: 'get'
     },
     description: 'get my info ',
-    accepts: [
-    ],
-    returns: [
-      {
-        arg: 'data', type: 'User', root: true
-      }
-    ]
+    accepts: [],
+    returns: [{
+      arg: 'data',
+      type: 'User',
+      root: true
+    }]
   });
 
 
@@ -244,6 +262,123 @@ module.exports = function (User) {
 
 
 
+  User.loginFacebook = function (data, callback) {
+    var socialId = data.id;
+    var token = data.token;
+    // var gender = data.gender;
+    var image = data.image;
+    var email = data.email;
+    var name = data.name;
+    var result;
+    User.findOne({
+      where: {
+        socialId: socialId,
+        typeLogIn: "facebook"
+      }
+    }, function (err, oneUser) {
+      if (err)
+        callback(err, null);
+      // new user
+      if (oneUser == null) {
+        // cheack if username is userd befor
+
+        const parts = image.split('.');
+        // extension = parts[parts.length - 1];
+        var extension = "jpg"
+        var newFilename = (new Date()).getTime() + '.' + extension;
+
+        const options = {
+          url: image,
+          dest: 'files/profile/' + newFilename // Save to /path/to/dest/image.jpg
+        }
+
+        download.image(options)
+          .then(({
+            filename,
+            imageFile
+          }) => {
+            image = urlFileRootSave + newFilename;
+            User.create({
+              socialId: socialId,
+              email: email,
+              avatar: image,
+              firstName: name,
+              status: "active",
+              password: "123",
+              registrationCompleted:false,
+              typeLogIn: "facebook"
+            }, function (err, newUser) {
+              if (err) {
+                // if (err.statusCode == 422)
+                //   callback(errors.account.emailAlreadyExistsSN(), null);
+                // else
+                  callback(err, null);
+              }
+              // create the token
+              User.app.models.AccessToken.create({
+                userId: newUser.id
+              }, function (err, newToken) {
+                User.app.models.AccessToken.findOne({
+                  include: {
+                    relation: 'user',
+                  },
+                  where: {
+                    userId: newUser.id
+                  }
+                }, function (err, token) {
+                  if (err)
+                    callback(err, null);
+                  result = token;
+                  result.isNew = true;
+                  callback(null, result);
+                });
+              })
+
+            })
+          })
+      }
+      // old user
+      else {
+        // get the token with user
+        User.app.models.AccessToken.findOne({
+          include: {
+            relation: 'user',
+          },
+          where: {
+            userId: oneUser.id
+          }
+        }, function (err, token) {
+          if (err)
+            callback(err, null);
+          result = token;
+          if (result == null) {
+            User.app.models.AccessToken.create({
+              userId: oneUser.id
+            }, function (err, newToken) {
+              User.app.models.AccessToken.findOne({
+                include: {
+                  relation: 'user',
+                },
+                where: {
+                  userId: oneUser.id
+                }
+              }, function (err, token) {
+                if (err)
+                  callback(err, null);
+                result = token;
+                result.isNew = false;
+                callback(null, result);
+              });
+            })
+          } else {
+            result.isNew = false;
+            callback(null, result);
+          }
+        });
+      }
+    });
+  }
+
 
 
 
@@ -255,22 +390,25 @@ module.exports = function (User) {
   //Make Notification Read
   User.remoteMethod('makeNotificationRead', {
     http: {
-      path: '/:id/mak-notifications-read/:notificationId', verb: 'put'
+      path: '/:id/mak-notifications-read/:notificationId',
+      verb: 'put'
     },
     description: 'Make My Notification Read',
-    accepts: [
-      {
-        arg: 'id',
-        type: 'string',
-        description: 'User ID',
-        http: { source: 'path' },
-      }, {
-        arg: 'notificationId',
-        type: 'string',
-        description: 'Notification ID',
-        http: { source: 'path' },
-      }
-    ],
+    accepts: [{
+      arg: 'id',
+      type: 'string',
+      description: 'User ID',
+      http: {
+        source: 'path'
+      },
+    }, {
+      arg: 'notificationId',
+      type: 'string',
+      description: 'Notification ID',
+      http: {
+        source: 'path'
+      },
+    }],
     returns: []
   });
   User.makeNotificationRead = (id, notificationId, callback) => {
@@ -357,4 +495,3 @@ module.exports = function (User) {
 
 
 };
-

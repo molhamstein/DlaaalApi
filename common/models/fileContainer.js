@@ -11,7 +11,7 @@ module.exports = function (FileContainer) {
   FileContainer.afterRemote('upload', function (context, result, next) {
     let src = path.join(__dirname, '../../files/');
     var folderName = context.req.params.container;
-    var logoUrl = src + "logo.PNG"
+    var logoUrl = src + "waterMark1.png"
 
     var dimensionsLogo = sizeOf(logoUrl);
     var logoRate = dimensionsLogo.height / dimensionsLogo.width;
