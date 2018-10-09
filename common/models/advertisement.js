@@ -71,7 +71,16 @@ module.exports = function (Advertisement) {
     if (context.res.locals.user.status !== 'active') {
       return next(errors.account.notActive());
     }
+
+    if (context.res.locals.user.phone == null || context.res.locals.user.phone == 0) {
+      return next(errors.account.notHasPhone());
+    }
+
+
     context.req.body.ownerId = context.req.accessToken.userId;
+    if (context.req.body.isFree != null) {
+      context.req.body.price = 0
+    }
     next();
   });
 
@@ -183,18 +192,21 @@ module.exports = function (Advertisement) {
       errorStatus: 422
     },
     description: 'send email to ads owner',
-    accepts: [
-      {
+    accepts: [{
         arg: 'id',
         type: 'number',
         description: 'Advertisement ID',
-        http: { source: 'path' },
+        http: {
+          source: 'path'
+        },
       },
       {
         arg: 'data',
         type: ``,
         description: ' send email to ads owner {email, name, phone, message}',
-        http: { source: 'body' },
+        http: {
+          source: 'body'
+        },
       }
     ],
     returns: []
