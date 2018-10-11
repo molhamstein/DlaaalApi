@@ -29,6 +29,7 @@
     "loopback-connector-mongodb": "^3.4.1",
     "loopback-connector-mysql": "^2.4.1",
     "loopback-context": "^3.3.0",
+    "loopback-ssl": "^1.0.3",
     "serve-favicon": "^2.0.1",
     "socket.io": "^2.0.4",
     "socketio-auth": "^0.1.0",

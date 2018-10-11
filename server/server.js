@@ -1,5 +1,5 @@
 'use strict';
-  require('cls-hooked');
+require('cls-hooked');
 // require('dotenv').config();
 var loopback = require('loopback');
 var boot = require('loopback-boot');
@@ -8,16 +8,23 @@ const LoopBackContext = require('loopback-context');
 app.use(LoopBackContext.perRequest());
 app.use(loopback.token());
 
+var loopbackSSL = require('loopback-ssl');
+
+
 const errors = require("../server/errors");
 
 app.use(function (req, res, next) {
   if (!req.accessToken) return next();
-  app.models.User.findById(req.accessToken.userId,
-    {
-      include: [
-        {relation: "bookmarks"},
-        {relation: "followers"},
-        {relation: "following"}
+  app.models.User.findById(req.accessToken.userId, {
+      include: [{
+          relation: "bookmarks"
+        },
+        {
+          relation: "followers"
+        },
+        {
+          relation: "following"
+        }
       ]
     },
     function (err, user) {
@@ -36,6 +43,7 @@ app.use(function (req, res, next) {
 
 app.start = function () {
   // start the web server
+
   return app.listen(function () {
     app.emit('started');
     var baseUrl = app.get('url').replace(/\/$/, '');
@@ -53,5 +61,6 @@ boot(app, __dirname, function (err) {
   // start the server if `$ node server.js`
   if (require.main === module) {
     app.start();
+    // return loopbackSSL.startServer(app);
   }
 });

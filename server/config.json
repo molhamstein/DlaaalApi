@@ -1,8 +1,8 @@
 {
   "restApiRoot": "/api",
   "host": "0.0.0.0",
-  "domain": "http://localhost:7500",
-  "siteDomain": "http://localhost:7500",
+  "domain": "https://localhost:7500",
+  "siteDomain": "https://localhost:7500",
   "port": 7500,
   "remoting": {
     "context": false,
