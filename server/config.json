@@ -1,9 +1,9 @@
 {
   "restApiRoot": "/api",
   "host": "0.0.0.0",
-  "domain": "https://localhost:443",
-  "siteDomain": "https://localhost:443",
-  "port": 443,
+  "domain": "https://localhost:7500",
+  "siteDomain": "https://localhost:7500",
+  "port": 7500,
   "remoting": {
     "context": false,
     "rest": {
