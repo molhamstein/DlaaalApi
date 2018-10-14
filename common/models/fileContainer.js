@@ -41,3 +41,13 @@ module.exports = function (FileContainer) {
     context.res.json(files);
   });
 };
+
+
+  // "certConfig": {
+  //   "path": "/etc/letsencrypt/live/dlaaal.com/",
+  //   "key": "privkey.pem",
+  //   "cert": "cert.pem",
+  //   "ca": [],
+  //   "requestCert": false,
+  //   "rejectUnauthorized": false
+  // }

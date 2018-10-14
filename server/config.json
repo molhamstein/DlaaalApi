@@ -1,9 +1,9 @@
 {
   "restApiRoot": "/api",
   "host": "0.0.0.0",
-  "domain": "https://localhost:7500",
-  "siteDomain": "https://localhost:7500",
-  "port": 7500,
+  "domain": "https://localhost:443",
+  "siteDomain": "https://localhost:443",
+  "port": 443,
   "remoting": {
     "context": false,
     "rest": {
@@ -23,9 +23,9 @@
   },
   "httpMode": false,
   "certConfig": {
-    "path": "/etc/letsencrypt/live/dlaaal.com/",
-    "key": "privkey.pem",
-    "cert": "cert.pem",
+    "path": "server/private/",
+    "key": "privatekey.pem",
+    "cert": "certificate.pem",
     "ca": [],
     "requestCert": false,
     "rejectUnauthorized": false
