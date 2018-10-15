@@ -21,11 +21,10 @@
     },
     "cors": false
   },
-  "httpMode": false,
   "certConfig": {
-    "path": "server/private/",
-    "key": "privatekey.pem",
-    "cert": "certificate.pem",
+    "path": "/etc/letsencrypt/live/dlaaal.com/",
+    "key": "privkey.pem",
+    "cert": "cert.pem",
     "ca": [],
     "requestCert": false,
     "rejectUnauthorized": false

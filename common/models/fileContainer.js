@@ -36,7 +36,7 @@ module.exports = function (FileContainer) {
         }
         images(imageUrl).draw(images(logoUrl).resize(newWidthtLogo, newHeightLogo), marginLeft, marginTop).save(src + "/" + folderName + "/" + file.name);
       }
-      files.push("http://108.179.218.237:7500" + config.restApiRoot + FileContainer.http.path + "/" + file.container + '/download/' + file.name);
+      files.push("https://dlaaal.com" + config.restApiRoot + FileContainer.http.path + "/" + file.container + '/download/' + file.name);
     });
     context.res.json(files);
   });
