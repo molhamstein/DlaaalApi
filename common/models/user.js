@@ -288,7 +288,7 @@ module.exports = function (User) {
 
         const options = {
           url: image,
-          dest: '/files/profile/' + newFilename // Save to /path/to/dest/image.jpg
+          dest: path.resolve(__dirname, '../../files/profile/' + newFilename) // 'files/profile/' + newFilename // Save to /path/to/dest/image.jpg
         }
 
         download.image(options)
@@ -304,7 +304,7 @@ module.exports = function (User) {
               firstName: name,
               status: "active",
               password: "123",
-              registrationCompleted:false,
+              registrationCompleted: false,
               typeLogIn: "facebook"
             }, function (err, newUser) {
               if (err) {
