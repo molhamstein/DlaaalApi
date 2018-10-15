@@ -40,7 +40,7 @@ module.exports = function (User) {
     };
 
     // options.verifyHref = "http://104.217.253.15/dlaaalAppDevelop/Dlaaal-webApp/dist/#" +
-    options.verifyHref = "http://dlaaal.com/#" +
+    options.verifyHref = "https://dlaaal.com/#" +
       '/login/verify' +
       '?uid=' + options.user.id;
     user.verify(options, function (err, res) {
@@ -265,7 +265,6 @@ module.exports = function (User) {
   User.loginFacebook = function (data, callback) {
     var socialId = data.id;
     var token = data.token;
-    // var gender = data.gender;
     var image = data.image;
     var email = data.email;
     var name = data.name;
@@ -289,7 +288,7 @@ module.exports = function (User) {
 
         const options = {
           url: image,
-          dest: 'files/profile/' + newFilename // Save to /path/to/dest/image.jpg
+          dest: '/files/profile/' + newFilename // Save to /path/to/dest/image.jpg
         }
 
         download.image(options)
@@ -309,9 +308,9 @@ module.exports = function (User) {
               typeLogIn: "facebook"
             }, function (err, newUser) {
               if (err) {
-                // if (err.statusCode == 422)
-                //   callback(errors.account.emailAlreadyExistsSN(), null);
-                // else
+                if (err.statusCode == 422)
+                  callback(errors.account.emailAlreadyExistsSN(), null);
+                else
                   callback(err, null);
               }
               // create the token
