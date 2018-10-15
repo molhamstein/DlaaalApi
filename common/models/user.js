@@ -288,7 +288,7 @@ module.exports = function (User) {
 
         const options = {
           url: image,
-          dest: path.resolve(__dirname, '../../files/profile/' + newFilename) // 'files/profile/' + newFilename // Save to /path/to/dest/image.jpg
+          dest: path.resolve(__dirname, '../../files/Profile/' + newFilename) // 'files/profile/' + newFilename // Save to /path/to/dest/image.jpg
         }
 
         download.image(options)
